@@ -6,5 +6,5 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 output static-website {
-   value = "http://${aws_s3_bucket.bucket.id}.s3-website-${bucket_region}.amazonaws.com"
+   value = "http://${aws_s3_bucket.bucket.id}.s3-website-${var.region}.amazonaws.com"
 }
