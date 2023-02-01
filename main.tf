@@ -39,7 +39,7 @@ resource "aws_s3_object" "object" {
   bucket = "test21121007"
   key    = "buddha.jpg"
   source = "./buddha.jpg"
-  #etag = filemd5("./buddha.jpg")
+  etag = filemd5("./buddha.jpg")
 
   depends_on = [aws_s3_bucket.bucket]
 }
@@ -48,7 +48,8 @@ resource "aws_s3_object" "index" {
   bucket = "test21121007"
   key    = "index.html"
   source = "./index.html"
-  #etag = filemd5("./buddha.jpg")
+  #content_type = "html"
+  etag = filemd5("./index.html")
 
   depends_on = [aws_s3_bucket.bucket]
 }
