@@ -7,23 +7,14 @@ resource "aws_s3_bucket" "bucket" {
    }
 }
 
-resource "aws_s3_object" "object" {
-  bucket = "test21121007"
-  key    = "buddha.jpg"
-  source = "./buddha.jpg"
-  etag = filemd5("./buddha.jpg")
-
-  depends_on = [aws_s3_bucket.bucket]
+resource "aws_s3_bucket_website_configuration" "website-config" {
+  bucket = data.aws_s3_bucket.bucket.bucket
+  index_document {
+       suffix = "index.html"
+  }
+  error_document {
+       key = "404.jpeg"
+  }
 }
-
-resource "aws_s3_object" "index" {
-  bucket = "test21121007"
-  key    = "index.html"
-  source = "./index.html"
-  etag = filemd5("./buddha.jpg")
-
-  depends_on = [aws_s3_bucket.bucket]
-}
-
 
 
