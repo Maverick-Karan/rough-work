@@ -22,7 +22,7 @@ resource "aws_s3_bucket_policy" "public_read_access" {
   "Statement": [
     {
       "Effect": "Allow",
-	  "Principal": "*",
+	   "Principal": "*",
       "Action": [ "s3:*" ],
       "Resource": [
         "arn:aws:s3:::test21121007/*"
