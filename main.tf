@@ -25,8 +25,7 @@ resource "aws_s3_bucket_policy" "public_read_access" {
 	  "Principal": "*",
       "Action": [ "s3:*" ],
       "Resource": [
-        "${aws_s3_bucket.bucket.arn}",
-        "${aws_s3_bucket.bucket.arn}/*"
+        "arn:aws:s3:::test21121007/*"
       ]
     }
   ]
