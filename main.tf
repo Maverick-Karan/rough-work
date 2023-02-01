@@ -17,18 +17,22 @@ resource "aws_s3_bucket_website_configuration" "website-config" {
   }
 }
 
-resource "aws_s3_bucket_policy" "public-access" {
+resource "aws_s3_bucket_policy" "public_read_access" {
   bucket = aws_s3_bucket.bucket.id
-  policy = <<EOF {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Action": "s3:*",
-            "Effect": "Allow",
-            "Resource": "arn:aws:s3:::test21121007",
-            "Principal": "*"
-          }
-        ]
-  } EOF
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+	  "Principal": "*",
+      "Action": [ "s3:*" ],
+      "Resource": [
+        "${aws_s3_bucket.bucket.arn}",
+        "${aws_s3_bucket.bucket.arn}/*"
+      ]
+    }
+  ]
 }
-
+EOF
+}
