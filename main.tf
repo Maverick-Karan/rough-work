@@ -24,6 +24,10 @@ resource "aws_s3_bucket_policy" "public-access" {
 
 data "aws_iam_policy_document" "access-policy" {
   statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::779524864497:oidc-provider/token.actions.githubusercontent.com"]
+    }
      actions = [
       "s3:GetObject",
       "s3:ListBucket",
