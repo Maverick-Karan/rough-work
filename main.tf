@@ -19,25 +19,16 @@ resource "aws_s3_bucket_website_configuration" "website-config" {
 
 resource "aws_s3_bucket_policy" "public-access" {
   bucket = aws_s3_bucket.bucket.id
-  policy = data.aws_iam_policy_document.access-policy.json
+  policy = <<EOF {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "s3:*",
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::test21121007",
+            "Principal": "*"
+          }
+        ]
+  } EOF
 }
-
-data "aws_iam_policy_document" "access-policy" {
-  statement {
-    principals {
-      type        = "AWS"
-      identifiers = ["arn:aws:iam::779524864497:oidc-provider/token.actions.githubusercontent.com"]
-    }
-     actions = [
-      "s3:GetObject",
-      "s3:ListBucket",
-    ]
-
-    resources = [
-      aws_s3_bucket.bucket.arn,
-      "${aws_s3_bucket.bucket.arn}/*",
-    ]
-  }
-}
-
 
